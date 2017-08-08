@@ -3,7 +3,7 @@
         <body>
         <div id='main text' class="center text-big bold">
                                   CHINMOYEE
-                    </div>
+        </div>
             	    <div class="center text-big bold">
             	      !!  Hello Everyone  !!
             	    </div>
@@ -19,22 +19,8 @@
                     <div class = "footer"> 
                     This button <button id="counter"> Click Me</button> has been clicked <span id="count">0</span>times.
                     </div>
-           </div>
-           <script>
-            console.log("JS Loaded")
-            var button = document.getElementById('counter')
-            var counter = 0;
-            
-             button.onclick = function() {
-              //make a request to counter endpoint
-               //capture the response and store it in a variable
-               //render the variable in correct span
-
-              counter = counter + 1;
-              var span = document.getElementById('count');
-              span.innerHTML = counter.toString();
-              };
-              console.log("Things went perfect");
-           </script>
+           <script src='main.js'></script>
+           
         </body>
+        
 </html>

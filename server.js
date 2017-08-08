@@ -47,6 +47,33 @@ app.get('/ui/madi.png', function (req, res) {
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
+var counter=1;
+app.get('/counter',function (req,res) {
+    counter++;
+    res.send(counter.toString());
+    
+});
+
+app.get('/submitbtn', function (req, res) {
+    console.log('IMAD submit test');
+    //submit name
+    var nameInput = doc.getElementById('name');
+    var name = nameInput.value;
+    var submitbtn = doc.getElementById('submit_btn');
+    submitbtn.onclick = function () {
+    //make a request to the server
+    
+    //capture a list of names and render it as a list
+    var names = ['name1','name2','name3'];
+    var list = '';
+    for(var i=0;i< names.length; i++)
+    {
+        list +='<li>' + names[i] + '</li>';
+    }
+     var ul = document.getElementById('namelist');
+     ul.innerHTML = list;
+};
+}
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 

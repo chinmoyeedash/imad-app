@@ -24,7 +24,7 @@ app.get('/test-db', function (req, res) {
   pool.query("Select * from user",function(err,result) {
       if (err) {
       
-          console.log("Error")
+          req.status(500).send(err.toString());
       }
       else {
           res.send(JSON.stringify(result));

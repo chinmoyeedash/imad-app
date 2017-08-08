@@ -49,6 +49,8 @@ app.get('/ui/main.js', function (req, res) {
 });
 var counter=1;
 app.get('/counter',function (req,res) {
+    console.log('IMAD counter test');
+    
     counter++;
     res.send(counter.toString());
     

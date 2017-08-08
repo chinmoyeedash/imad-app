@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 var pool=new Pool(config);
 app.get('/dbtest', function (req, res) {
 console.log('IMAD test');
-  pool.query("Select * from user",function(err,result) {
+  pool.query("Select * from User",function(err,result) {
       if (err) {
       
           res.status(500).send(err.toString());

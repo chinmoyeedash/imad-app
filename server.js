@@ -25,7 +25,7 @@ console.log('IMAD test');
   pool.query("Select * from user",function(err,result) {
       if (err) {
       
-          req.status(500).send(err.toString());
+          res.status(500).send(err.toString());
       }
       else {
           res.send(JSON.stringify(result));

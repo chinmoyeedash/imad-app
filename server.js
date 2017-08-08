@@ -59,9 +59,9 @@ app.get('/counter',function (req,res) {
 app.get('/submitbtn', function (req, res) {
     console.log('IMAD submit test');
     //submit name
-    var nameInput = doc.getElementById('name');
+    var nameInput = document.getElementById('name');
     var name = nameInput.value;
-    var submitbtn = doc.getElementById('submit_btn');
+    var submitbtn = document.getElementById('submitbtn');
     submitbtn.onclick = function () {
     //make a request to the server
     

@@ -72,9 +72,10 @@ submitbtn.onclick = function () {
     if (request.readyState===XMLHttpRequest.DONE) {
         if (request.status===200) {
             var names=JSON.parse(request.responseText);
+             console.log(names);
             var list='';
             for(var i=0;i<names.length;i++){
-                list=list + '<li>'+names[i]+'<li>';
+                list=list + '<li>'+names[i]+'</li>';
                 
             }
             console.log(list);

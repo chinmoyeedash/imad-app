@@ -69,7 +69,7 @@ var myimg= document.getElementById('myimg');
 var marginLeft = 0;
 function moveRight()
 {
-    marignLeft = marginLeft + 10;
+    marginLeft = marginLeft + 10;
     var marg=marginLeft + 'px';
     console.log(marg);
     myimg.style.marginLeft = marg ;

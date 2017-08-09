@@ -64,15 +64,17 @@ console.log('newname :'+newname);
     request.send(null);
 };
 
-var img= document.getElementById('myimg');
+var myimg= document.getElementById('myimg');
 
 var marginLeft = 0;
 function moveRight()
 {
-marignLeft = marginLeft + 10;
-img.style.marginLeft = marginLeft + 'px';
+    marignLeft = marginLeft + 10;
+    var marg=marginLeft + 'px';
+    console.log(marg);
+    img.style.marginLeft = marg ;
 }
-img.onclick = function()
+myimg.onclick = function()
 {
 var interval= setInterval(moveRight,100);
 

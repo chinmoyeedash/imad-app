@@ -47,7 +47,7 @@ app.get('/ui/madi.png', function (req, res) {
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
-var counter=1;
+var counter=0;
 app.get('/counter',function (req,res) {
     console.log('IMAD counter test');
     

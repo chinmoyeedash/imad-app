@@ -72,7 +72,7 @@ function moveRight()
     marignLeft = marginLeft + 10;
     var marg=marginLeft + 'px';
     console.log(marg);
-    img.style.marginLeft = marg ;
+    myimg.style.marginLeft = marg ;
 }
 myimg.onclick = function()
 {

@@ -1,54 +1,27 @@
-// //Counter Code
-// var button = document.getElementById('counter');
-// var counter = 0;
-
-// button.onclick = function() {
-
-// //create a request to counter endpoint
-
-// var request = new XMLHttpRequest();
-// request.onreadystatechange = function () {
-// if(request.readystate === XMLHttpRequest.DONE)
-// {
-// if(request.status===200)
-// {
-// var counter = request.responseText;
-// var span = document.getElementById('count');
-// span.innerHTML = counter.toString();
-// }
-// }
-// //not yet done - no action reqd
-// };
-
-// //make a request
-// request.open('GET','http://chinmoyeedash31.imad.hasura-app.io/counter',true);
-// request.send(null);
-
-// };
-// Counter code
+//Counter Code
 var button = document.getElementById('counter');
+button.onclick = function() {
 
-button.onclick = function () {
+//create a request to counter endpoint
 
-// Create a request object-- XMLhttpRequest()
 var request = new XMLHttpRequest();
-
-// Capture the response and store it in a variable
 request.onreadystatechange = function () {
-  if (request.readyState === XMLHttpRequest.DONE){
-      //Take some action
-      if (request.status === 200) {
-          var counter = request.responseText;
-          var span = document.getElementById('count');
-          span.innerHTML = counter.toString();
-      }
-  }   
-// Not done yet
-};
+if(request.readystate === XMLHttpRequest.DONE)
+{
+    if(request.status===200)
+    {
+        var counter = request.responseText;
+        var span = document.getElementById('count');
+        span.innerHTML = counter.toString();
+    }
+}
+    //not yet done - no action reqd
+    };
+    
+    //make a request
+    request.open('GET','http://chinmoyeedash31.imad.hasura-app.io/counter',true);
+    request.send(null);
 
-// Make the request
-request.open('GET', 'http://chinmoyeedash31.imad.hasura-app.io/counter', true);
-request.send(null);
 };
 
 // Submit name
@@ -89,5 +62,19 @@ var newname = nameInput.value;
 console.log('newname :'+newname);
     request.open('GET','http://chinmoyeedash31.imad.hasura-app.io/submitbtn?name='+newname,true);
     request.send(null);
+};
+
+var img= document.getElementById('myimg');
+
+var marginLeft = 0;
+function moveRight()
+{
+marignLeft = marginLeft + 10;
+img.style.marginLeft = marginLeft + 'px';
+}
+img.onclick = function()
+{
+var interval= setInterval(moveRight,100);
+
 };
         

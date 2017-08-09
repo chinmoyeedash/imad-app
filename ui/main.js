@@ -83,7 +83,7 @@ submitbtn.onclick = function () {
         }
     }
     };
-    request.open('GET','chinmoyeedash31.imad.hasura-app.io/submitbtn?name='+newname,true);
+    request.open('GET','http://chinmoyeedash31.imad.hasura-app.io/submitbtn?name='+newname,true);
     request.send(null);
 };
         

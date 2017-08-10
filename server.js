@@ -34,7 +34,11 @@ console.log('IMAD test');
       }
     });
 });
+app.get('/favicon.ico', function (req, res) {
 
+  res.sendFile(path.join(__dirname, 'ui', 'favicon.ico'));
+
+});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));

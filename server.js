@@ -29,7 +29,7 @@ console.log('IMAD test');
          res.status(500).send(err.toString());
       }
       else {
-          console.log(result);
+          console.log('result='+result);
           res.send(JSON.stringify(result));
       }
     });

@@ -36,7 +36,7 @@ console.log('IMAD test');
 });
 app.get('/favicon.ico', function (req, res) {
 
-  res.sendFile(path.join(__dirname, 'ui', 'favicon-flower.png'));
+  res.sendFile(path.join(__dirname, 'ui', 'world-icon.ico'));
 
 });
 

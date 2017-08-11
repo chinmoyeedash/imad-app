@@ -34,9 +34,9 @@ console.log('IMAD test');
       }
     });
 });
-app.get('/ui/world-icon.ico', function (req, res) {
+app.get('/favicon.ico', function (req, res) {
 console.log('IMAD searching for favicon');
-  res.sendFile(path.join(__dirname, 'ui', 'world-icon.ico'));
+  res.sendFile(path.join(__dirname, 'ui', 'favicon.ico'));
 
 });
 

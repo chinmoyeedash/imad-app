@@ -67,30 +67,28 @@ app.get('/submitbtn', function (req, res) {
     res.send(JSON.stringify(names));
 });
 var articles = {
-    'article-one': {
-        title: '|Article One|',
-        heading: 'Article One',
-        date: '19-Aug-17',
-        content:` 
-                <p>
-                  This is the content of my first article.
-                </p>`},
-    'article-two': {
-        title: '|Article Two|',
-        heading: 'Article Two',
-        date: '20-Aug-17',
-        content:` 
-                <p>
-                  This is the content of my second article.
-                </p>`},
-    'article-three': {
-        title: '|Article Three|',
-        heading: 'Article Three',
-        date: '21-Aug-17',
-        content:` 
-                <p>
-                  This is the content of my third article.
-                </p>`}
+'articleone':{
+title: 'Article One',
+date: 'August 6, 2017',
+heading:'Article One',
+
+content:`<p>Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!n!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!</p>
+<p>Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!n!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!</p>
+<p>Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!n!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!Here goes my content! Check this page soon!</p>`
+}, 
+'articletwo':{
+title: 'Article Two',
+date: 'August 7, 2017',
+heading:'Article Two',
+content:'<p>Here goes my content! Check this second article soon! </p>'
+},
+'articlethree':{
+title: 'Article Three',
+date: 'August 7, 2017',
+heading:'Article Three',
+content:'<p>Here goes my content! Check this third article soon! </p>'
+    
+}
 };
 
 function createTemplate (data){

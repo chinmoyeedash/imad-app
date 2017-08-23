@@ -112,7 +112,7 @@ This is the conent for my second article.
 }
 };
 
-}
+
 
 function createTemplate (data){
     var title= data.title;

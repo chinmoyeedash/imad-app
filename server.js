@@ -68,27 +68,26 @@ app.get('/submitbtn', function (req, res) {
 });
 var articles = {
     'article-one': {
-        title: '|Article One|',
-        heading: 'Article One',
-        date: '19-Aug-17',
-        content:` 
-                <p>
+        title: 'One',
+        heading: '--One--',
+        date: '9-dec-17',
+        content:`<p>
                   This is the content of my first article.
-                </p>`},
+                </p>`
+        
+    },
     'article-two': {
-        title: '|Article Two|',
-        heading: 'Article Two',
-        date: '20-Aug-17',
-        content:` 
-                <p>
+        title: 'Two',
+        heading: 'Two',
+        date: '2-jan-16',
+        content:`<p>
                   This is the content of my second article.
                 </p>`},
     'article-three': {
-        title: '|Article Three|',
-        heading: 'Article Three',
+        title: 'Three',
+        heading: 'Three',
         date: '21-Aug-17',
-        content:` 
-                <p>
+        content:`<p>
                   This is the content of my third article.
                 </p>`}
 };

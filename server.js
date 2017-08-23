@@ -66,7 +66,7 @@ app.get('/submitbtn', function (req, res) {
     names.push(newname);
     res.send(JSON.stringify(names));
 });
-/*var articles = {
+var articles = {
     'article-one': {
         title: 'One',
         heading: '--One--',
@@ -90,28 +90,7 @@ app.get('/submitbtn', function (req, res) {
         content:`<p>
                   This is the content of my third article.
                 </p>`}
-};*/
-var articles = {
-'article-one': {
-title: 'Article one .. Im Varun',
-heading: 'Article One',
-date: 'August 5,2017',
-content: `
-<p>
-This is the conent for my first article.This is the conent for my first article.This is the conent for my first article.This is the conent for my first article.This is the conent for my first article.This is the conent for my first article. 
-</p>` 
-},
-'article-two': {
-title: 'Article Two .. Im Varun',
-heading: 'Article Two',
-date: 'August 10,2017',
-content:` 
-<p>
-This is the conent for my second article. 
-</p>`
-}
 };
-
 
 
 function createTemplate (data){

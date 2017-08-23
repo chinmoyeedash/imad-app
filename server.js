@@ -23,14 +23,14 @@ var pool=new Pool(config);
 console.log(pool);
 app.get('/dbtest', function (req, res) {
 console.log('IMAD test');
-  pool.query('select * from Articles',function(err,result) {
+  pool.query('select * from user',function(err,result) {
       if (err) {
          //console.log(err.toString());
          res.status(500).send(err.toString());
       }
       else {
           //console.log('result='+result);
-          res.send(JSON.stringify(result.rows));
+          res.send(JSON.stringify(result));
       }
     });
 });

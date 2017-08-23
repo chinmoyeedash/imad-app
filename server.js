@@ -6,7 +6,7 @@ var Pool=require('pg').Pool;
 var config = {
     user: 'chinmoyeedash31',
     database: 'chinmoyeedash31',
-    host: 'localhost',
+    host: localhost,
     port: '5432',
     password: process.env.DB_PASSWORD
 };

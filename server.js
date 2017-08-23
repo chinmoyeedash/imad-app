@@ -30,7 +30,7 @@ console.log('IMAD test');
       }
       else {
           //console.log('result='+result);
-          res.send(JSON.stringify(result));
+          res.send(JSON.stringify(result.rows));
       }
     });
 });

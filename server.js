@@ -139,6 +139,7 @@ function createTemplate (data){
 app.get('/:articleName', function (req, res){
     
     var articleName = req.params.articleName;
+    res.header('Content-Type', 'text/html');
   res.send(createTemplate(articles[articleName]));
 });
 // Do not change port, otherwise your app won't run on IMAD servers

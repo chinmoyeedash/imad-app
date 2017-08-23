@@ -66,6 +66,81 @@ app.get('/submitbtn', function (req, res) {
     names.push(newname);
     res.send(JSON.stringify(names));
 });
+var articles = {
+    'article-one': {
+        title: '|Article One|',
+        heading: 'Article One',
+        date: '19-Aug-17',
+        content:` 
+                <p>
+                  This is the content of my first article.
+                </p>`},
+    'article-two': {
+        title: '|Article Two|',
+        heading: 'Article Two',
+        date: '20-Aug-17',
+        content:` 
+                <p>
+                  This is the content of my second article.
+                </p>`},
+    'article-three': {
+        title: '|Article Three|',
+        heading: 'Article Three',
+        date: '21-Aug-17',
+        content:` 
+                <p>
+                  This is the content of my third article.
+                </p>`}
+};
+
+function createTemplate (data){
+    var title= data.title;
+    var heading= data.heading;
+    var date= data.date;
+    var content= data.content;
+    
+    var htmlTemplate=`
+        <html>
+        <head>
+            <title>
+                ${title}
+            </title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link href="/ui/style.css" rel="stylesheet" />
+        </head>
+        <body>
+           <div class="container">
+                <div>
+                    <a href="/">Home</a>
+                </div>
+                
+                <hr>
+                
+                <div>
+                    <h3>
+                    ${heading}
+                    </h3>
+                </div>
+                
+                <div>
+                    ${date}
+                </div>
+                
+                <div>
+                    ${content}
+                </div>
+           </div>
+        </body>
+        </html>
+    `;
+    return createTemplate;
+}
+
+app.get('/:articleName', function (req, res){
+    
+    var articleName = req.params.articleName;
+  res.send(createTemplate(articles[articleName]));
+});
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 

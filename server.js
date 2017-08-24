@@ -23,7 +23,7 @@ var pool=new Pool(config);
 console.log(pool);
 app.get('/dbtest', function (req, res) {
 console.log('IMAD test');
-  pool.query('select * from users',function(err,result) {
+  pool.query('select * from test',function(err,result) {
       if (err) {
          //console.log(err.toString());
          res.status(500).send(err.toString());
@@ -66,7 +66,7 @@ app.get('/submitbtn', function (req, res) {
     names.push(newname);
     res.send(JSON.stringify(names));
 });
-var articles = {
+/*var articles = {
     'article-one': {
         title: 'One',
         heading: '--One--',
@@ -90,9 +90,9 @@ var articles = {
         content:`<p>
                   This is the content of my third article.
                 </p>`}
-};
+};*/
 
-
+//server side templating
 function createTemplate (data){
     var title= data.title;
     var heading= data.heading;
@@ -140,8 +140,25 @@ function createTemplate (data){
 app.get('/:articleName', function (req, res){
     
     var articleName = req.params.articleName;
-    res.header('Content-Type', 'text/html');
-  res.send(createTemplate(articles[articleName]));
+    //res.header('Content-Type', 'text/html');
+    //res.send(createTemplate(articles[articleName]));
+    pool.query("select * from articles where title= '"+articleName+"'",function(err,result) {
+      if (err) {
+         //console.log(err.toString());
+         res.status(500).send(err.toString());
+      }
+      else {
+          if (result.rows.length===0){
+              res.status(404).send(err.toString());
+          }
+          var article=result.rows[0];
+          //console.log('result='+result);
+          res.send(createTemplate(article));
+      }
+    });
+
+    
+    
 });
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80

@@ -151,7 +151,7 @@ app.get('/:articleName', function (req, res){
         
     //important to do parameterisation to avoid sql injection
     //
-     pool.query("select * from articles where title= $1'",[articleName],function(err,result) {
+     pool.query("select * from articles where title= $1",[articleName],function(err,result) {
    
       if (err) {
          //console.log(err.toString());

@@ -137,7 +137,7 @@ function createTemplate (data){
     return htmlTemplate;
 }*/
 var articles = {
-'article-One ': {
+'article-one': {
 title : 'Article one i kanth',
 heading : 'Article one',
 date : 'sep14,2017',
@@ -176,6 +176,7 @@ This is content of my third article.
 };
 
 function createTemplate(data){
+    console.log(data.toString());
 var title=data.title;
 var date=data.date;
 var heading=data.heading;

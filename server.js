@@ -142,6 +142,11 @@ app.get('/:articleName', function (req, res){
     var articleName = req.params.articleName;
     //res.header('Content-Type', 'text/html');
     //res.send(createTemplate(articles[articleName]));
+    
+    //very wrong way as it can easily lead to sql injection .. where user puts his own string which we are directly putting in our query.
+    
+    //eg:type this in place of articleone in the browser and u can check it deletes content from ur table   
+    //;delete * from articles where 'a'='a 
     pool.query("select * from articles where title= '"+articleName+"'",function(err,result) {
       if (err) {
          //console.log(err.toString());

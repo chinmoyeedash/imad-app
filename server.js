@@ -176,7 +176,7 @@ This is content of my third article.
 };
 
 function createTemplate(data){
-    console.log(data);
+    console.log("data="+data);
 var title=data.title;
 var date=data.date;
 var heading=data.heading;

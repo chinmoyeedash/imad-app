@@ -215,6 +215,7 @@ app.get('/:articleName', function (req, res){
     
     var articleName = req.params.articleName;
     //res.header('Content-Type', 'text/html');
+    console.log("name="+articles[articleName]);
     res.send(createTemplate(articles[articleName]));
     
     //very wrong way as it can easily lead to sql injection .. where user puts his own string which we are directly putting in our query.

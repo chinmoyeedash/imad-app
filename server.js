@@ -91,7 +91,7 @@ app.get('/submitbtn', function (req, res) {
                   This is the content of my third article.
                 </p>`}
 };*/
-
+/*
 //server side templating
 function createTemplate (data){
     var title= data.title;
@@ -135,13 +135,86 @@ function createTemplate (data){
         </html>
     `;
     return htmlTemplate;
+}*/
+var articles = {
+'article-One ': {
+title : 'Article one i kanth',
+heading : 'Article one',
+date : 'sep14,2017',
+content : `
+<p>
+This is content of my first article. This is content of my first article. This is content of my first article.
+This is content of my first article. This is content of my first article.
+</p>
+<p>
+This is content of my first article. This is content of my first article. This is content of my first article.
+This is content of my first article. This is content of my first article.
+</p>
+<p>
+This is content of my first article. This is content of my first article. This is content of my first article.
+This is content of my first article. This is content of my first article.
+</p>`
+},
+'article-two' : {
+title : 'Article two i kanth',
+heading : 'Article two',
+date : 'sep11,2017',
+content : `
+<p>
+This is content of my second article.
+</p>
+`},
+'article-three' : {
+title : 'Article three i kanth',
+heading : 'Article three',
+date : 'sep9,2017',
+content : `
+<p>
+This is content of my third article.
+</p>
+`}
+};
+
+function createTemplate(data){
+var title=data.title;
+var date=data.date;
+var heading=data.heading;
+var content=data.content;
+var htmlTemplate=
+`<html>
+<head>
+<title>
+${title}
+</title>
+<link href="/ui/style.css" rel="stylesheet" />
+</head>
+<body>
+<div class = "container">
+<div>
+<a href="/">Home</a>
+</div>
+<hr/>
+<h3>
+${heading}
+</h3>
+<div>
+${date}
+</div>
+<div>
+${content}
+</div>
+</div>
+</body>
+</html>`;
+return htmlTemplate;
+
 }
 
 app.get('/:articleName', function (req, res){
     
     var articleName = req.params.articleName;
     //res.header('Content-Type', 'text/html');
-    //res.send(createTemplate(articles[articleName]));
+    res.send(createTemplate(articles[articleName]));
     
     //very wrong way as it can easily lead to sql injection .. where user puts his own string which we are directly putting in our query.
     
@@ -151,7 +224,7 @@ app.get('/:articleName', function (req, res){
         
     //important to do parameterisation to avoid sql injection
     //
-     pool.query("select * from articles where title= $1",[articleName],function(err,result) {
+   /*  pool.query("select * from articles where title= $1",[articleName],function(err,result) {
    
       if (err) {
          //console.log(err.toString());
@@ -165,7 +238,7 @@ app.get('/:articleName', function (req, res){
           //console.log('result='+result);
           res.send(createTemplate(article));
       }
-    });
+    });*/
 
     
     

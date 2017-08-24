@@ -145,16 +145,21 @@ app.get('/:articleName', function (req, res){
     
     //very wrong way as it can easily lead to sql injection .. where user puts his own string which we are directly putting in our query.
     
-    //eg:type this in place of articleone in the browser and u can check it deletes content from ur table   
-    //;delete * from articles where 'a'='a 
-    pool.query("select * from articles where title= '"+articleName+"'",function(err,result) {
+    //eg:type this in place of articleone in the browser and u can check it deletes content from ur table ..(dangerous)   
+    //';delete from "articles" where 'a'='a 
+    //pool.query("select * from articles where title= '"+articleName+"'",function(err,result) {
+        
+    //important to do parameterisation to avoid sql injection
+    //
+     pool.query("select * from articles where title= $1'",[articleName],function(err,result) {
+   
       if (err) {
          //console.log(err.toString());
          res.status(500).send(err.toString());
       }
       else {
           if (result.rows.length===0){
-              res.status(404).send(err.toString());
+              res.status(404).send("article not found");
           }
           var article=result.rows[0];
           //console.log('result='+result);

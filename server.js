@@ -93,11 +93,11 @@ app.post('/login',function(req,res) {
      pool.query('SELECT * FROM "users" where username=$1',[username],function(err,result){
          if (err) {
          //console.log(err.toString());
-         res.status(500).send(err.toString());
+         res.send(500).send(err.toString());
       }
       else {
           if (result.rows.length===0){
-              res.status(403).send("username/password invalid");
+              res.send(403).send("username/password invalid");
           }
           var dbString=result.rows[0].password;
           //split returna an array from line 55 "pbkdf2","10000",salt,key.toString('hex') and we need the 3rd value from that array
@@ -106,7 +106,7 @@ app.post('/login',function(req,res) {
           if (dbString===hashedPassword) {
               res.send("Credentials are correct");
           } else {
-              res.status(404).send("Invalid username/password");
+              res.send(403).send("Invalid username/password");
           }
       } 
      })

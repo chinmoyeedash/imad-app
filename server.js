@@ -103,7 +103,11 @@ app.post('/login',function(req,res) {
           //split returna an array from line 55 "pbkdf2","10000",salt,key.toString('hex') and we need the 3rd value from that array
           var salt=dbString.split('$')[2];
           var hashedPassword=hash(password,salt); //hash of password from login page and original salt
-          
+          if (dbString===hashedPassword) {
+              res.send("Credentials are correct");
+          } else {
+              res.status(404).send("Invalid username/password");
+          }
       } 
      })
 })

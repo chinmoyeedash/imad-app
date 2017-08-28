@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool=require('pg').Pool;
-
+var crypto = require('crypto');
 var config = {
     user: 'chinmoyeedash31',
     database: 'chinmoyeedash31',
@@ -39,6 +39,20 @@ console.log('IMAD searching for favicon');
   res.sendFile(path.join(__dirname, 'ui', 'favicon.ico'));
 
 });
+
+function hash(input){
+    //Provides a synchronous Password-Based Key Derivation Function 2 (PBKDF2) implementation. Digest algorithm applied to derive a key of the requested byte length (keylen) from the password, salt and iterations. If the digest algorithm is not specified, a default of 'sha1' is used.
+ var key = crypto.pbkdf2Sync('secret', 'salt', 100000, 512, 'sha512');
+console.log(key.toString('hex'));  // 'c5e478d...1469e50'
+return(key.toString('hex'));
+    
+}
+
+app.get('/hash/:input',function(req,res){
+    var hashedString=hash(req.params.input);
+    res.send(hashedString);
+})
+
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));

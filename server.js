@@ -4,6 +4,7 @@ var path = require('path');
 var Pool=require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser=require('body-parser');
+var session=require('express-session');
 
 var config = {
     user: 'chinmoyeedash31',
@@ -19,7 +20,11 @@ app.use(morgan('combined'));
 
 //if JSON content, load in req.body variable
 app.use(bodyParser.json());
-
+//cookie set for a month, default secret value set
+app.use(session({
+    secret: 'SecretValue',
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30}
+}));
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));

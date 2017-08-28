@@ -109,6 +109,13 @@ app.post('/login',function(req,res) {
           var salt=dbString.split('$')[2];
           var hashedPassword=hash(password,salt); //hash of password from login page and original salt
           if (dbString===hashedPassword) {
+              //set session before sending message
+               // Set the session
+                req.session.auth = {userId: result.rows[0].id};
+                // set cookie with a session id
+                // internally, on the server side, it maps the session id to an object
+                // { auth: {userId }}
+              
               res.send("Credentials are correct");
           } else {
               res.send(403).send("Invalid username/password");
@@ -116,6 +123,25 @@ app.post('/login',function(req,res) {
       } 
      })
 })
+
+//to test if session is getting created properly
+app.get('/check-login',function (req,res){
+    //if req has session,session has auth and auth has userid in it
+     if (req.session && req.session.auth && req.session.auth.userId) {
+       // Load the user object
+       pool.query('SELECT * FROM "user" WHERE id = $1', [req.session.auth.userId], function (err, result) {
+           if (err) {
+              res.status(500).send(err.toString());
+           } else {
+              res.send(result.rows[0].username);    
+           }
+       });
+   } else {
+       res.status(400).send('You are not logged in');
+   }
+});
+
+
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));

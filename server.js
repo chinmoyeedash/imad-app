@@ -46,18 +46,18 @@ console.log('IMAD searching for favicon');
 
 });
 
-function hash(input){
+function hash(input,salt){
     //Provides a synchronous Password-Based Key Derivation Function 2 (PBKDF2) implementation. Digest algorithm applied to derive a key of the requested byte length (keylen) from the password, salt and iterations. If the digest algorithm is not specified, a default of 'sha1' is used.
     
     //hash evaluates to same value of same algo (eg. sha512), but hackers can maintain commonly hashed values of common strings used fpr a webapp then they can lookup table and can find out but now salt is used to  
- var key = crypto.pbkdf2Sync(input, 'salt', 100000, 512, 'sha512');
+ var key = crypto.pbkdf2Sync(input, salt, 100000, 512, 'sha512');
 console.log(key.toString('hex'));  // 'c5e478d...1469e50'
 return ["pbkdf2","10000",salt,hashed.toString('hex')].join('$');
     
 }
 
 app.get('/hash/:input',function(req,res){
-    var hashedString=hash(req.params.input);
+    var hashedString=hash(req.params.input,"SomeRandomString");
     res.send(hashedString);
 });
 //post request to test it ..need to use curl for testing purpose

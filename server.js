@@ -69,7 +69,7 @@ app.get('/hash/:input',function(req,res){
      var password=req.body.password;
      
      //create random salt
-     var salt=crypto.getRandomBytes(128).toString('hex');
+     var salt=crypto.randomBytes(128).toString('hex');
      //hash the password with the salt
      var dbString=(hash(password,salt));
      //insert into db 

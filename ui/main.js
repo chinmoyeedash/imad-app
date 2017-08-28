@@ -77,14 +77,15 @@ signin.onclick=function() {
         }
             
         }
-    }
     };
+
     
-    var nameInput = document.getElementById('nameinput');
-var newname = nameInput.value;
-console.log('newname :'+newname);
-    request.open('GET','http://chinmoyeedash31.imad.hasura-app.io/submitbtn?name='+newname,true);
-    request.send(null);
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    console.log('username :'+username);
+    request.open('POST','http://chinmoyeedash31.imad.hasura-app.io/login',true);
+    request.setRequestHeader('Content-Type','application/json');
+    request.send(JSON.stringify({username: username,password: password}));
 };
 
 var myimg= document.getElementById('myimg');

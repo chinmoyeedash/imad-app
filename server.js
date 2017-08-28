@@ -3,6 +3,8 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool=require('pg').Pool;
 var crypto = require('crypto');
+var bodyParser=require('body-parser');
+
 var config = {
     user: 'chinmoyeedash31',
     database: 'chinmoyeedash31',
@@ -14,6 +16,10 @@ var config = {
 
 var app = express();
 app.use(morgan('combined'));
+
+//if JSON content, load in req.body variable
+app.use(bodyParser.json());
+
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
@@ -42,17 +48,41 @@ console.log('IMAD searching for favicon');
 
 function hash(input){
     //Provides a synchronous Password-Based Key Derivation Function 2 (PBKDF2) implementation. Digest algorithm applied to derive a key of the requested byte length (keylen) from the password, salt and iterations. If the digest algorithm is not specified, a default of 'sha1' is used.
- var key = crypto.pbkdf2Sync('secret', 'salt', 100000, 512, 'sha512');
+    
+    //hash evaluates to same value of same algo (eg. sha512), but hackers can maintain commonly hashed values of common strings used fpr a webapp then they can lookup table and can find out but now salt is used to  
+ var key = crypto.pbkdf2Sync(input, 'salt', 100000, 512, 'sha512');
 console.log(key.toString('hex'));  // 'c5e478d...1469e50'
-return(key.toString('hex'));
+return ["pbkdf2","10000",salt,hashed.toString('hex')].join('$');
     
 }
 
 app.get('/hash/:input',function(req,res){
     var hashedString=hash(req.params.input);
     res.send(hashedString);
-})
-
+});
+//post request to test it ..need to use curl for testing purpose
+ app.post('/create-user',function(req,res) {
+     
+     //from JSON request to look for these keys useranem and password inside body we use bodyParser
+     
+     var username=req.body.username;
+     var password=req.body.password;
+     
+     //create random salt
+     var salt=crypto.getRandomBytes(128).toString('hex');
+     //hash the password with the salt
+     var dbString=(hash(password,salt));
+     //insert into db 
+     pool.query('INSERT INTO "users"(username,password) VALUES($1,$2)',[username,dbString],function(err,result) {
+         if (err) {
+            //console.log(err.toString());
+            res.status(500).send(err.toString());
+        }
+      else {
+           res.send("user created successfully "+username);
+        }
+     });
+     });
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));

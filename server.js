@@ -52,7 +52,7 @@ function hash(input,salt){
     //hash evaluates to same value of same algo (eg. sha512), but hackers can maintain commonly hashed values of common strings used fpr a webapp then they can lookup table and can find out but now salt is used to  
  var key = crypto.pbkdf2Sync(input, salt, 100000, 512, 'sha512');
 console.log(key.toString('hex'));  // 'c5e478d...1469e50'
-return ["pbkdf2","10000",salt,hashed.toString('hex')].join('$');
+return ["pbkdf2","10000",salt,key.toString('hex')].join('$');
     
 }
 

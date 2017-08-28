@@ -65,6 +65,28 @@ console.log('newname :'+newname);
     request.send(null);
 };
 
+var signin=document.getElementById('signin');
+signin.onclick=function() {
+    var request=new XMLHttpRequest();
+    request.onreadystatechange=function() {
+    if (request.readyState===XMLHttpRequest.DONE) {
+        if (request.status===200) {
+            alert("user logged in");
+        } else {
+            alert(request.status);
+        }
+            
+        }
+    }
+    };
+    
+    var nameInput = document.getElementById('nameinput');
+var newname = nameInput.value;
+console.log('newname :'+newname);
+    request.open('GET','http://chinmoyeedash31.imad.hasura-app.io/submitbtn?name='+newname,true);
+    request.send(null);
+};
+
 var myimg= document.getElementById('myimg');
 
 var marginLeft = 0;

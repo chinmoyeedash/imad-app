@@ -89,7 +89,7 @@ app.post('/login',function(req,res) {
      
      var username=req.body.username;
      var password=req.body.password;
-     
+     console.log("username="+username+"pwd="+password);
      pool.query('SELECT * FROM "users" where username=$1',[username],function(err,result){
          if (err) {
          //console.log(err.toString());

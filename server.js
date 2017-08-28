@@ -82,7 +82,31 @@ app.get('/hash/:input',function(req,res){
            res.send("user created successfully "+username);
         }
      });
-     });
+});
+
+app.post('/login',function(req,res) {
+     //from JSON request to look for these keys useranem and password inside body we use bodyParser
+     
+     var username=req.body.username;
+     var password=req.body.password;
+     
+     pool.query('SELECT * FROM "users" where username=$1',[username],function(err,result){
+         if (err) {
+         //console.log(err.toString());
+         res.status(500).send(err.toString());
+      }
+      else {
+          if (result.rows.length===0){
+              res.status(403).send("username/password invalid");
+          }
+          var dbString=result.rows[0].password;
+          //split returna an array from line 55 "pbkdf2","10000",salt,key.toString('hex') and we need the 3rd value from that array
+          var salt=dbString.split('$')[2];
+          var hashedPassword=hash(password,salt); //hash of password from login page and original salt
+          
+      } 
+     })
+})
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));

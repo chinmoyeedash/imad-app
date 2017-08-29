@@ -88,6 +88,7 @@ app.get('/hash/:input',function(req,res){
         }
      });
 });
+d;
 
 app.post('/login',function(req,res) {
      //from JSON request to look for these keys useranem and password inside body we use bodyParser
@@ -121,8 +122,8 @@ app.post('/login',function(req,res) {
               res.send(403).send("Invalid username/password");
           }
       } 
-     })
-})
+     });
+});
 
 //to test if session is getting created properly
 app.get('/check-login',function (req,res){
@@ -141,6 +142,10 @@ app.get('/check-login',function (req,res){
    }
 });
 
+app.get('/logout',function(req,res) {
+   delete req.session.auth;
+   req.send("Logged out");
+});
 
 
 app.get('/ui/style.css', function (req, res) {

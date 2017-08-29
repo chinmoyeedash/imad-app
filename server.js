@@ -88,7 +88,7 @@ app.get('/hash/:input',function(req,res){
         }
      });
 });
-d;
+
 
 app.post('/login',function(req,res) {
      //from JSON request to look for these keys useranem and password inside body we use bodyParser

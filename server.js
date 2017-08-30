@@ -17,14 +17,13 @@ var config = {
 
 var app = express();
 app.use(morgan('combined'));
-
-//if JSON content, load in req.body variable
 app.use(bodyParser.json());
 //cookie set for a month, default secret value set
-/*app.use(session({
-    secret: 'SecretValue',
+
+app.use(session({
+    secret: 'someRandomSecretValue',
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 30}
-}));*/
+}));
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));

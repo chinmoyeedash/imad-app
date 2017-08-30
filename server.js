@@ -91,7 +91,7 @@ app.get('/hash/:input',function(req,res){
 
 app.post('/login',function(req,res) {
      //from JSON request to look for these keys useranem and password inside body we use bodyParser
-     
+     console.log("Ready to login");
      var username=req.body.username;
      var password=req.body.password;
      console.log("username="+username+"pwd="+password);

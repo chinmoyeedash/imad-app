@@ -83,7 +83,7 @@ app.get('/hash/:input',function(req,res){
             res.status(500).send(err.toString());
         }
       else {
-           res.send(JSON.parse('{"message":"user created successfully "+username);
+           res.send(JSON.parse('{"message":"user created successfully "}'));
         }
      });
 });

@@ -83,7 +83,7 @@ app.get('/hash/:input',function(req,res){
             res.status(500).send(err.toString());
         }
       else {
-           res.send("user created successfully "+username);
+           res.send(JSON.parse('{"message":"user created successfully "+username);
         }
      });
 });
@@ -102,7 +102,8 @@ app.post('/login',function(req,res) {
       }
       else {
           if (result.rows.length===0){
-              res.status(403).send("username/password invalid");
+               res.setHeader('Content-Type', 'application/json');
+              res.status(403).send(JSON.parse('{"message":"username/password invalid"}'));
           }
           var dbString=result.rows[0].password;
           //split returna an array from line 55 "pbkdf2","10000",salt,key.toString('hex') and we need the 3rd value from that array
@@ -115,10 +116,13 @@ app.post('/login',function(req,res) {
                 // set cookie with a session id
                 // internally, on the server side, it maps the session id to an object
                 // { auth: {userId }}
-              
-              res.status(200).send("Credentials are correct");
+              res.setHeader('Content-Type', 'application/json');
+                res.send(JSON.parse('{"message":"Credential Correct"}'));
+              //res.status(200).send("Credentials are correct");
           } else {
-              res.status(403).send("Invalid username/password");
+              res.setHeader('Content-Type', 'application/json');
+               
+              res.status(403)(JSON.parse('{"message":"Invalid username/password"}'));
           }
       } 
      });

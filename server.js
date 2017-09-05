@@ -286,6 +286,32 @@ ${content}
 return htmlTemplate;
 
 }
+app.get('/get-articles', function (req, res) { 
+//get all article's
+pool.query("SELECT * from articles", function(err, result) {
+    res.setHeader('Content-Type', 'application/json');
+if (err) {
+console.error('Error executing query', err.stack);
+res.status(500).send(JSON.parse('{"message":"'+err.toString()+'"}'));
+} else {
+if(result.rows.length === 0)
+{
+res.status(400).send(JSON.parse('{"message":"No Article found"}'));
+}
+else
+{
+//res.send(JSON.stringify(result));
+//res.send(JSON.stringify(result.rows));
+//var articleData = result.rows[0];
+//res.send(JSON.stringify(createTemplate(articleData)));
+res.setHeader('Content-Type', 'application/json');
+res.send(JSON.stringify(result.rows));
+}
+}
+console.log(result.rows)
+});
+
+});
 
 app.get('/:articleName', function (req, res){
     
@@ -322,32 +348,7 @@ app.get('/:articleName', function (req, res){
     
 });
 
-app.get('/get-articles', function (req, res) { 
-//get all article's
-pool.query("SELECT * from article", function(err, result) {
-    res.setHeader('Content-Type', 'application/json');
-if (err) {
-console.error('Error executing query', err.stack);
-res.status(500).send(JSON.parse('{"message":"'+err.toString()+'"}'));
-} else {
-if(result.rows.length === 0)
-{
-res.status(400).send(JSON.parse('{"message":"No Article found"}'));
-}
-else
-{
-//res.send(JSON.stringify(result));
-//res.send(JSON.stringify(result.rows));
-//var articleData = result.rows[0];
-//res.send(JSON.stringify(createTemplate(articleData)));
-res.setHeader('Content-Type', 'application/json');
-res.send(JSON.stringify(result.rows));
-}
-}
-console.log(result.rows)
-});
 
-});
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 

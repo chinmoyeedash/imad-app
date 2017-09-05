@@ -80,7 +80,8 @@ app.get('/hash/:input',function(req,res){
      pool.query('INSERT INTO "users"(username,password) VALUES($1,$2)',[username,dbString],function(err,result) {
          if (err) {
             //console.log(err.toString());
-            res.status(500).send(JSON.parse('{"message":"+err.toString()+"}'));
+            res.setHeader('Content-Type', 'application/json');
+            res.status(500).send(JSON.parse('{"message":"'+err.toString()+'"}'));
         }
       else {
            res.send(JSON.parse('{"message":"user created successfully"}'));
@@ -98,7 +99,7 @@ app.post('/login',function(req,res) {
      pool.query('SELECT * FROM "users" where username=$1',[username],function(err,result){
          if (err) {
          //console.log(err.toString());
-         res.status(500).send(err.toString());
+         res.status(500).send(JSON.parse('{"message":"'+err.toString()+'"}'));
       }
       else {
           if (result.rows.length===0){
@@ -133,15 +134,16 @@ app.get('/check-login',function (req,res){
     //if req has session,session has auth and auth has userid in it
      if (req.session && req.session.auth && req.session.auth.userId) {
        // Load the user object
+       res.setHeader('Content-Type', 'application/json');
        pool.query('SELECT * FROM "user" WHERE id = $1', [req.session.auth.userId], function (err, result) {
            if (err) {
-              res.status(500).send(err.toString());
+              res.status(500).send(JSON.parse('{"message":"'+err.toString()+'"}'));
            } else {
-              res.send(result.rows[0].username);    
+              res.send(JSON.parse('{"message":"'+result.rows[0].username+'"}'));    
            }
        });
    } else {
-       res.status(400).send('You are not logged in');
+       res.status(400).send(JSON.parse('{"message":"You are not logged in"}'));
    }
 });
 
@@ -247,44 +249,7 @@ function createTemplate (data){
     `;
     return htmlTemplate;
 }*/
-var articles = {
-'article-one': {
-title : 'Article one i kanth',
-heading : 'Article one',
-date : 'sep14,2017',
-content : `
-<p>
-This is content of my first article. This is content of my first article. This is content of my first article.
-This is content of my first article. This is content of my first article.
-</p>
-<p>
-This is content of my first article. This is content of my first article. This is content of my first article.
-This is content of my first article. This is content of my first article.
-</p>
-<p>
-This is content of my first article. This is content of my first article. This is content of my first article.
-This is content of my first article. This is content of my first article.
-</p>`
-},
-'article-two' : {
-title : 'Article two i kanth',
-heading : 'Article two',
-date : 'sep11,2017',
-content : `
-<p>
-This is content of my second article.
-</p>
-`},
-'article-three' : {
-title : 'Article three i kanth',
-heading : 'Article three',
-date : 'sep9,2017',
-content : `
-<p>
-This is content of my third article.
-</p>
-`}
-};
+
 
 function createTemplate(data){
     console.log("data="+data);
@@ -355,6 +320,33 @@ app.get('/:articleName', function (req, res){
 
     
     
+});
+
+app.get('/get-articles', function (req, res) { 
+//get all article's
+pool.query("SELECT * from article", function(err, result) {
+    res.setHeader('Content-Type', 'application/json');
+if (err) {
+console.error('Error executing query', err.stack);
+res.status(500).send(JSON.parse('{"message":"'+err.toString()+'"}'));
+} else {
+if(result.rows.length === 0)
+{
+res.status(400).send(JSON.parse('{"message":"No Article found"}'));
+}
+else
+{
+//res.send(JSON.stringify(result));
+//res.send(JSON.stringify(result.rows));
+//var articleData = result.rows[0];
+//res.send(JSON.stringify(createTemplate(articleData)));
+res.setHeader('Content-Type', 'application/json');
+res.send(JSON.stringify(result.rows));
+}
+}
+console.log(result.rows)
+});
+
 });
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80

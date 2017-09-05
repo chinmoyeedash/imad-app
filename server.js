@@ -65,7 +65,7 @@ app.get('/hash/:input',function(req,res){
     res.send(hashedString);
 });
 //post request to test it ..need to use curl for testing purpose
- app.post('/create-user',function(req,res) {
+ app.post('/register',function(req,res) {
      
      //from JSON request to look for these keys useranem and password inside body we use bodyParser
      

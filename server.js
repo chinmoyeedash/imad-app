@@ -80,10 +80,10 @@ app.get('/hash/:input',function(req,res){
      pool.query('INSERT INTO "users"(username,password) VALUES($1,$2)',[username,dbString],function(err,result) {
          if (err) {
             //console.log(err.toString());
-            res.status(500).send(err.toString());
+            res.status(500).send(JSON.parse('{"message":"+err.toString()+"}'));
         }
       else {
-           res.send(JSON.parse('{"message":"user created successfully "}'));
+           res.send(JSON.parse('{"message":"user created successfully"}'));
         }
      });
 });
